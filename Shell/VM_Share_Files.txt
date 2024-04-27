@@ -1,0 +1,11 @@
+Brief explanation of how to setup file sharing between host and guest in virt-manager
+
+Set up vm hardware -9p.
+
+Add code in terminal in guest. I use the Public folder as the shared folder, but you could make another folder called something like 'Shared' or whatever.
+
+	sudo mount -t 9p -o trans=virtio /sharepoint Public 
+
+You will want to alias the above code to save typing, so add alias to .bashrc as below (or similar)
+	
+	alias vmshare="Code as above"
