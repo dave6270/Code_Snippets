@@ -1,0 +1,37 @@
+Friday Clean Up
+
+# Just a list of small maintenance tasks for my Manjaro Linux setup.
+# It is planned to turn this into a proper script to semi automate these tasks.
+
+# Check for updates
+sudo pacman -Syu
+
+# Check for yay updates
+yay -Syu --aur
+
+# List all ophaned packages
+pacman -Qdt
+
+# Remove orphans if any found
+sudo pacman -Rs $(pacman -Qdtq)
+
+# Clean package cache, but keep last three for safety
+paccache -rvk3
+
+# Delete package cache for uninstalled packages
+sudo pacman -Sc
+yay -Sc
+
+# Check journal usage size
+journalctl --disk-usage
+
+# Clean journals older than seven days
+sudo journalctl --vacuum-time=7d
+
+# Find and delete thumbnails older than thirty days
+find ~/.cache/thumbnails -type f -atime +30 -delete
+
+# Clear coredump files
+cd /var/lib/systemd/coredump
+sudo rm *.lz4
+
